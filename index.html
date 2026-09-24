@@ -3,71 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منيو المقهى العصري - Artisan Coffee</title>
+    <title>مطعم اللحظة - المنيو الرقمي</title>
     <link rel="stylesheet" href="style.css">
-    <!-- خط عربي أنيق مريح للعين -->
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <!-- رأس الصفحة -->
     <header class="header">
         <div class="header-content">
-            <h1>Artisan Coffee ☕</h1>
-            <p>تجربة قهوة استثنائية ومحمصة بكل حب</p>
+            <h1>🔥 مطعم وكافيه اللحظة</h1>
+            <p>أشهى المشويات، البرجر العصري، والأطباق الجانبية الساخنة</p>
         </div>
     </header>
 
     <!-- محتوى المنيو -->
     <main class="container">
         
-        <!-- قسم المشروبات الساخنة -->
+        <!-- قسم الوجبات الرئيسية -->
         <section class="category-section">
-            <h2>☕ المشروبات الساخنة</h2>
+            <h2>🍔 الوجبات الرئيسية والبرجر</h2>
             <div class="items-grid">
                 
                 <div class="menu-item">
                     <div class="item-info">
-                        <h3>لاتيه فانيلا</h3>
-                        <p>إسبريسو غني مع حليب مبخر ونكهة الفانيلا الطبيعية</p>
-                        <span class="price">3.50 JOD</span>
+                        <h3>برجر لحم الكلاسيك</h3>
+                        <p>شريحة لحم بقرى طازجة، جبنة تشيدر، خس، وصوص خاص</p>
+                        <span class="price">5.50 JOD</span>
                     </div>
-                    <button class="add-btn" onclick="addToCart('لاتيه فانيلا', 3.50)">إضافة للسلة</button>
+                    <button class="add-btn" onclick="addToCart('برجر لحم الكلاسيك', 5.50)">إضافة</button>
                 </div>
 
                 <div class="menu-item">
                     <div class="item-info">
-                        <h3>سبانيش لاتيه</h3>
-                        <p>إسبريسو، حليب مكثف محلى، ومذاق كريمي ساحر</p>
-                        <span class="price">3.75 JOD</span>
+                        <h3>برجر دجاج سبايسي</h3>
+                        <p>صدر دجاج مقرمش حار، صوص النار، هالبينو، وجبنة مذابة</p>
+                        <span class="price">5.00 JOD</span>
                     </div>
-                    <button class="add-btn" onclick="addToCart('سبانيش لاتيه', 3.75)">إضافة للسلة</button>
+                    <button class="add-btn" onclick="addToCart('برجر دجاج سبايسي', 5.00)">إضافة</button>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h3>دابل سماش برجر</h3>
+                        <p>شريحتين لحم مشويتان على الفحم مع جبنة مزدوجة وبصل كاراميل</p>
+                        <span class="price">7.25 JOD</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('دابل سماش برجر', 7.25)">إضافة</button>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h3>وجبة تشكن زينجر</h3>
+                        <p>قطع دجاج مقرمشة تقدم مع البطاطس، الثومية، والخبز الطازج</p>
+                        <span class="price">6.00 JOD</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('وجبة تشكن زينجر', 6.00)">إضافة</button>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h3>ساندويتش فيلي تشيز ستيك</h3>
+                        <p>شرائح لحم رفيعة مع فطر، فلفل رومي، وجبنة موزاريلا سايحة</p>
+                        <span class="price">6.50 JOD</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('ساندويتش فيلي تشيز ستيك', 6.50)">إضافة</button>
                 </div>
 
             </div>
         </section>
 
-        <!-- قسم المخبوزات والحلويات -->
+        <!-- قسم المشويات على الفحم -->
         <section class="category-section">
-            <h2>🥐 المخبوزات والحلويات</h2>
+            <h2>🥩 المشويات العربية الأصيلة</h2>
             <div class="items-grid">
                 
                 <div class="menu-item">
                     <div class="item-info">
-                        <h3>كرواسون بالزبدة</h3>
-                        <p>طازج، مقرمش، ومخبوز يومياً بطريقة فرانسية أصيلة</p>
-                        <span class="price">2.00 JOD</span>
+                        <h3>وجبة كباب لحم</h3>
+                        <p>3 أسياخ كباب لحم طازج مشوي على الفحم، يتقدم مع الطماطم والبصل</p>
+                        <span class="price">8.50 JOD</span>
                     </div>
-                    <button class="add-btn" onclick="addToCart('كرواسون بالزبدة', 2.00)">إضافة للسلة</button>
+                    <button class="add-btn" onclick="addToCart('وجبة كباب لحم', 8.50)">إضافة</button>
                 </div>
 
                 <div class="menu-item">
                     <div class="item-info">
-                        <h3>تشيز كيك البقان</h3>
-                        <p>طبقات ناعمة مع صوص الكراميل وجوز البقان المحمص</p>
-                        <span class="price">4.25 JOD</span>
+                        <h3>شيش طاووق</h3>
+                        <p>أوراك دجاج متبلة بالخلطة الخاصة ومشوية على الفحم مع الثومية</p>
+                        <span class="price">7.50 JOD</span>
                     </div>
-                    <button class="add-btn" onclick="addToCart('تشيز كيك البقان', 4.25)">إضافة للسلة</button>
+                    <button class="add-btn" onclick="addToCart('شيش طاووق', 7.50)">إضافة</button>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h3>مشاكل مشويات (مكس جريل)</h3>
+                        <p>تشكيلة فاخرة من الكباب، الشيش طاووق، والريش بتتبيلة المطعم</p>
+                        <span class="price">12.00 JOD</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('مشاكل مشويات مكس جريل', 12.00)">إضافة</button>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h3>ريش لحم غنم</h3>
+                        <p>ريش طرية ومتبلة بعناية مشوية بمهارة على لهب الفحم الحاد</p>
+                        <span class="price">13.50 JOD</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('ريش لحم غنم', 13.50)">إضافة</button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- قسم المقبلات والجانبيات -->
+        <section class="category-section">
+            <h2>🍟 المقبلات والجانبيات</h2>
+            <div class="items-grid">
+                
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h3>بطاطس مقلية بالبهارات</h3>
+                        <p>بطاطس ذهبية مقرمشة مع خلطة بهارات المطعم السرية</p>
+                        <span class="price">2.00 JOD</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('بطاطس مقلية بالبهارات', 2.00)">إضافة</button>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h3>أصابع الجبن المقلية (موزاريلا)</h3>
+                        <p>5 قطع أصابع جبن موزاريلا مغطاة بفتات الخبز المقرمش مع صوص المارينارا</p>
+                        <span class="price">3.50 JOD</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('أصابع الجبن المقلية', 3.50)">إضافة</button>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h3>حلقات البصل المقرمشة</h3>
+                        <p>حلقات بصل ذهبية مقلية تقدم مع الصوص المدخن</p>
+                        <span class="price">2.75 JOD</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('حلقات البصل المقرمشة', 2.75)">إضافة</button>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h3>حمص بالطحينة</h3>
+                        <p>حمص كريمي ناعم مع زيت الزيتون وقطرات الليمون الطازج</p>
+                        <span class="price">2.50 JOD</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('حمص بالطحينة', 2.50)">إضافة</button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- قسم المشروبات والمنعشات -->
+        <section class="category-section">
+            <h2>🥤 المشروبات والمنعشات</h2>
+            <div class="items-grid">
+                
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h3>مشروبات غازية (علب)</h3>
+                        <p>كوكاكولا، سبرايت، فانتا (بارد ومثلج)</p>
+                        <span class="price">1.00 JOD</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('مشروبات غازية', 1.00)">إضافة</button>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h3>عصير ليمون بالنعناع</h3>
+                        <p>عصير طازج منعش محضر يدويًا يومياً</p>
+                        <span class="price">2.50 JOD</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('عصير ليمون بالنعناع', 2.50)">إضافة</button>
                 </div>
 
             </div>
@@ -89,7 +203,7 @@
         <div class="modal-content">
             <h3>تأكيد الطلب</h3>
             <p>الرجاء إدخال رقم الطاولة الحالية لإرسال الطلب:</p>
-            <input type="number" id="tableNumber" placeholder="مثال: الطاولة رقم 5" min="1">
+            <input type="number" id="tableNumber" placeholder="مثال: الطاولة رقم 4" min="1">
             <div class="modal-buttons">
                 <button class="confirm-btn" onclick="sendOrderToWhatsApp()">إرسال الطلب</button>
                 <button class="cancel-btn" onclick="closeCheckoutModal()">إلغاء</button>
