@@ -3,217 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مطعم اللحظة - المنيو الرقمي</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <title>Burger House - المنيو الإلكتروني</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
+        body { font-family: 'Cairo', sans-serif; }
+    </style>
 </head>
-<body>
+<body class="bg-gray-900 text-white pb-24">
 
-    <!-- رأس الصفحة -->
-    <header class="header">
-        <div class="header-content">
-            <h1>🔥 مطعم وكافيه اللحظة</h1>
-            <p>أشهى المشويات، البرجر العصري، والأطباق الجانبية الساخنة</p>
+    <!-- رأس الصفحة (Header) -->
+    <header class="bg-gray-800 shadow-md sticky top-0 z-50 border-b border-gray-700">
+        <div class="max-w-md mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3 space-x-reverse">
+                <div class="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center text-gray-900 font-black text-xl">
+                    <i class="fa-solid fa-burger"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight">Burger House</h1>
+                    <p class="text-xs text-amber-400">برعاية خدمة MenuQR</p>
+                </div>
+            </div>
+            <div class="bg-gray-700 px-3 py-1 rounded-full text-xs text-gray-300">
+                <i class="fa-solid fa-wifi text-green-400 ml-1"></i> متصل
+            </div>
         </div>
     </header>
 
-    <!-- محتوى المنيو -->
-    <main class="container">
-        
-        <!-- قسم الوجبات الرئيسية -->
-        <section class="category-section">
-            <h2>🍔 الوجبات الرئيسية والبرجر</h2>
-            <div class="items-grid">
-                
-                <div class="menu-item">
-                    <div class="item-info">
-                        <h3>برجر لحم الكلاسيك</h3>
-                        <p>شريحة لحم بقرى طازجة، جبنة تشيدر، خس، وصوص خاص</p>
-                        <span class="price">5.50 JOD</span>
+    <!-- الأقسام (Categories Bar) -->
+    <nav class="max-w-md mx-auto px-4 py-3 overflow-x-auto whitespace-nowrap scrollbar-none flex gap-2 bg-gray-900 sticky top-[61px] z-40 border-b border-gray-800">
+        <a href="#burgers" class="bg-amber-500 text-gray-900 font-bold px-4 py-1.5 rounded-full text-sm shadow">🍔 برجر</a>
+        <a href="#chicken" class="bg-gray-800 text-gray-300 hover:bg-gray-700 font-medium px-4 py-1.5 rounded-full text-sm">🍗 دجاج</a>
+        <a href="#drinks" class="bg-gray-800 text-gray-300 hover:bg-gray-700 font-medium px-4 py-1.5 rounded-full text-sm">🥤 مشروبات</a>
+        <a href="#extras" class="bg-gray-800 text-gray-300 hover:bg-gray-700 font-medium px-4 py-1.5 rounded-full text-sm">🍟 إضافات</a>
+    </nav>
+
+    <!-- محتوى المنتجات (Products List) -->
+    <main class="max-w-md mx-auto px-4 py-4 space-y-6">
+
+        <!-- قسم البرجر -->
+        <section id="burgers">
+            <h2 class="text-xl font-black text-amber-400 mb-3 border-r-4 border-amber-500 pr-2">البرجر المميز</h2>
+            <div class="space-y-3">
+                <!-- منتج 1 -->
+                <div class="bg-gray-800 rounded-2xl p-3 flex gap-3 shadow-lg border border-gray-700">
+                    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=300&q=80" alt="سماش برجر" class="w-24 h-24 object-cover rounded-xl">
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-base">دبل سماش برجر</h3>
+                            <p class="text-xs text-gray-400 mt-0.5 line-clamp-2">لحم أنغوس طازج، جبنة تشيدر، صوص الحوس الخاص.</p>
+                        </div>
+                        <div class="flex justify-between items-center mt-2">
+                            <span class="font-black text-amber-400 text-sm">6.50 د.أ</span>
+                            <button class="bg-amber-500 hover:bg-amber-600 text-gray-900 w-8 h-8 rounded-full flex items-center justify-center font-bold shadow transition-transform active:scale-95">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
                     </div>
-                    <button class="add-btn" onclick="addToCart('برجر لحم الكلاسيك', 5.50)">إضافة</button>
                 </div>
 
-                <div class="menu-item">
-                    <div class="item-info">
-                        <h3>برجر دجاج سبايسي</h3>
-                        <p>صدر دجاج مقرمش حار، صوص النار، هالبينو، وجبنة مذابة</p>
-                        <span class="price">5.00 JOD</span>
+                <!-- منتج 2 -->
+                <div class="bg-gray-800 rounded-2xl p-3 flex gap-3 shadow-lg border border-gray-700">
+                    <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=300&q=80" alt="مشوي برجر" class="w-24 h-24 object-cover rounded-xl">
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-base">رويال بايكون برجر</h3>
+                            <p class="text-xs text-gray-400 mt-0.5 line-clamp-2">لحم بقر مدخن، بايكون مقرمش، صوص باربكيو.</p>
+                        </div>
+                        <div class="flex justify-between items-center mt-2">
+                            <span class="font-black text-amber-400 text-sm">7.25 د.أ</span>
+                            <button class="bg-amber-500 hover:bg-amber-600 text-gray-900 w-8 h-8 rounded-full flex items-center justify-center font-bold shadow transition-transform active:scale-95">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
                     </div>
-                    <button class="add-btn" onclick="addToCart('برجر دجاج سبايسي', 5.00)">إضافة</button>
                 </div>
-
-                <div class="menu-item">
-                    <div class="item-info">
-                        <h3>دابل سماش برجر</h3>
-                        <p>شريحتين لحم مشويتان على الفحم مع جبنة مزدوجة وبصل كاراميل</p>
-                        <span class="price">7.25 JOD</span>
-                    </div>
-                    <button class="add-btn" onclick="addToCart('دابل سماش برجر', 7.25)">إضافة</button>
-                </div>
-
-                <div class="menu-item">
-                    <div class="item-info">
-                        <h3>وجبة تشكن زينجر</h3>
-                        <p>قطع دجاج مقرمشة تقدم مع البطاطس، الثومية، والخبز الطازج</p>
-                        <span class="price">6.00 JOD</span>
-                    </div>
-                    <button class="add-btn" onclick="addToCart('وجبة تشكن زينجر', 6.00)">إضافة</button>
-                </div>
-
-                <div class="menu-item">
-                    <div class="item-info">
-                        <h3>ساندويتش فيلي تشيز ستيك</h3>
-                        <p>شرائح لحم رفيعة مع فطر، فلفل رومي، وجبنة موزاريلا سايحة</p>
-                        <span class="price">6.50 JOD</span>
-                    </div>
-                    <button class="add-btn" onclick="addToCart('ساندويتش فيلي تشيز ستيك', 6.50)">إضافة</button>
-                </div>
-
             </div>
         </section>
 
-        <!-- قسم المشويات على الفحم -->
-        <section class="category-section">
-            <h2>🥩 المشويات العربية الأصيلة</h2>
-            <div class="items-grid">
-                
-                <div class="menu-item">
-                    <div class="item-info">
-                        <h3>وجبة كباب لحم</h3>
-                        <p>3 أسياخ كباب لحم طازج مشوي على الفحم، يتقدم مع الطماطم والبصل</p>
-                        <span class="price">8.50 JOD</span>
+        <!-- قسم الدجاج -->
+        <section id="chicken">
+            <h2 class="text-xl font-black text-amber-400 mb-3 border-r-4 border-amber-500 pr-2">وجبات الدجاج</h2>
+            <div class="space-y-3">
+                <div class="bg-gray-800 rounded-2xl p-3 flex gap-3 shadow-lg border border-gray-700">
+                    <img src="https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?auto=format&fit=crop&w=300&q=80" alt="كريسبي دجاج" class="w-24 h-24 object-cover rounded-xl">
+                    <div class="flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-base">كريسبي تشكن برجر</h3>
+                            <p class="text-xs text-gray-400 mt-0.5 line-clamp-2">صدر دجاج مقرمش حار، خس، صوص المايونيز الحار.</p>
+                        </div>
+                        <div class="flex justify-between items-center mt-2">
+                            <span class="font-black text-amber-400 text-sm">5.75 د.أ</span>
+                            <button class="bg-amber-500 hover:bg-amber-600 text-gray-900 w-8 h-8 rounded-full flex items-center justify-center font-bold shadow transition-transform active:scale-95">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
                     </div>
-                    <button class="add-btn" onclick="addToCart('وجبة كباب لحم', 8.50)">إضافة</button>
                 </div>
-
-                <div class="menu-item">
-                    <div class="item-info">
-                        <h3>شيش طاووق</h3>
-                        <p>أوراك دجاج متبلة بالخلطة الخاصة ومشوية على الفحم مع الثومية</p>
-                        <span class="price">7.50 JOD</span>
-                    </div>
-                    <button class="add-btn" onclick="addToCart('شيش طاووق', 7.50)">إضافة</button>
-                </div>
-
-                <div class="menu-item">
-                    <div class="item-info">
-                        <h3>مشاكل مشويات (مكس جريل)</h3>
-                        <p>تشكيلة فاخرة من الكباب، الشيش طاووق، والريش بتتبيلة المطعم</p>
-                        <span class="price">12.00 JOD</span>
-                    </div>
-                    <button class="add-btn" onclick="addToCart('مشاكل مشويات مكس جريل', 12.00)">إضافة</button>
-                </div>
-
-                <div class="menu-item">
-                    <div class="item-info">
-                        <h3>ريش لحم غنم</h3>
-                        <p>ريش طرية ومتبلة بعناية مشوية بمهارة على لهب الفحم الحاد</p>
-                        <span class="price">13.50 JOD</span>
-                    </div>
-                    <button class="add-btn" onclick="addToCart('ريش لحم غنم', 13.50)">إضافة</button>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- قسم المقبلات والجانبيات -->
-        <section class="category-section">
-            <h2>🍟 المقبلات والجانبيات</h2>
-            <div class="items-grid">
-                
-                <div class="menu-item">
-                    <div class="item-info">
-                        <h3>بطاطس مقلية بالبهارات</h3>
-                        <p>بطاطس ذهبية مقرمشة مع خلطة بهارات المطعم السرية</p>
-                        <span class="price">2.00 JOD</span>
-                    </div>
-                    <button class="add-btn" onclick="addToCart('بطاطس مقلية بالبهارات', 2.00)">إضافة</button>
-                </div>
-
-                <div class="menu-item">
-                    <div class="item-info">
-                        <h3>أصابع الجبن المقلية (موزاريلا)</h3>
-                        <p>5 قطع أصابع جبن موزاريلا مغطاة بفتات الخبز المقرمش مع صوص المارينارا</p>
-                        <span class="price">3.50 JOD</span>
-                    </div>
-                    <button class="add-btn" onclick="addToCart('أصابع الجبن المقلية', 3.50)">إضافة</button>
-                </div>
-
-                <div class="menu-item">
-                    <div class="item-info">
-                        <h3>حلقات البصل المقرمشة</h3>
-                        <p>حلقات بصل ذهبية مقلية تقدم مع الصوص المدخن</p>
-                        <span class="price">2.75 JOD</span>
-                    </div>
-                    <button class="add-btn" onclick="addToCart('حلقات البصل المقرمشة', 2.75)">إضافة</button>
-                </div>
-
-                <div class="menu-item">
-                    <div class="item-info">
-                        <h3>حمص بالطحينة</h3>
-                        <p>حمص كريمي ناعم مع زيت الزيتون وقطرات الليمون الطازج</p>
-                        <span class="price">2.50 JOD</span>
-                    </div>
-                    <button class="add-btn" onclick="addToCart('حمص بالطحينة', 2.50)">إضافة</button>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- قسم المشروبات والمنعشات -->
-        <section class="category-section">
-            <h2>🥤 المشروبات والمنعشات</h2>
-            <div class="items-grid">
-                
-                <div class="menu-item">
-                    <div class="item-info">
-                        <h3>مشروبات غازية (علب)</h3>
-                        <p>كوكاكولا، سبرايت، فانتا (بارد ومثلج)</p>
-                        <span class="price">1.00 JOD</span>
-                    </div>
-                    <button class="add-btn" onclick="addToCart('مشروبات غازية', 1.00)">إضافة</button>
-                </div>
-
-                <div class="menu-item">
-                    <div class="item-info">
-                        <h3>عصير ليمون بالنعناع</h3>
-                        <p>عصير طازج منعش محضر يدويًا يومياً</p>
-                        <span class="price">2.50 JOD</span>
-                    </div>
-                    <button class="add-btn" onclick="addToCart('عصير ليمون بالنعناع', 2.50)">إضافة</button>
-                </div>
-
             </div>
         </section>
 
     </main>
 
-    <!-- سلة المشتريات العائمة -->
-    <div class="cart-bar" id="cartBar">
-        <div class="cart-info">
-            <span id="cartCount">0 أطباق</span>
-            <span id="cartTotal">0.00 JOD</span>
-        </div>
-        <button class="checkout-btn" onclick="openCheckoutModal()">إتمام الطلب عبر الواتساب</button>
-    </div>
-
-    <!-- نافذة إدخال رقم الطاولة -->
-    <div class="modal" id="checkoutModal">
-        <div class="modal-content">
-            <h3>تأكيد الطلب</h3>
-            <p>الرجاء إدخال رقم الطاولة الحالية لإرسال الطلب:</p>
-            <input type="number" id="tableNumber" placeholder="مثال: الطاولة رقم 4" min="1">
-            <div class="modal-buttons">
-                <button class="confirm-btn" onclick="sendOrderToWhatsApp()">إرسال الطلب</button>
-                <button class="cancel-btn" onclick="closeCheckoutModal()">إلغاء</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- نظام التنبيهات المخصص (Toast) -->
-    <div id="toast" class="toast">تمت الإضافة بنجاح ✨</div>
-
-    <script src="script.js"></script>
 </body>
 </html>
