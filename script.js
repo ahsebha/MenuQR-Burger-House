@@ -1,397 +1,835 @@
-const products = [
-    {
-        id: 1,
-        name: "Classic Burger",
-        price: 2.50,
-        category: "burger",
-        image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800"
-    },
-    {
-        id: 2,
-        name: "Cheese Burger",
-        price: 3.00,
-        category: "burger",
-        image: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=800"
-    },
-    {
-        id: 3,
-        name: "Double Burger",
-        price: 3.75,
-        category: "burger",
-        image: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=800"
-    },
-    {
-        id: 4,
-        name: "Chicken Burger",
-        price: 2.75,
-        category: "burger",
-        image: "https://images.unsplash.com/photo-1600891964092-4316c288032e?w=800"
-    },
-    {
-        id: 5,
-        name: "Margherita Pizza",
-        price: 3.50,
-        category: "pizza",
-        image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=800"
-    },
-    {
-        id: 6,
-        name: "Pepperoni Pizza",
-        price: 4.00,
-        category: "pizza",
-        image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800"
-    },
-    {
-        id: 7,
-        name: "Chicken Pizza",
-        price: 4.25,
-        category: "pizza",
-        image: "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=800"
-    },
-    {
-        id: 8,
-        name: "Vegetable Pizza",
-        price: 3.75,
-        category: "pizza",
-        image: "https://images.unsplash.com/photo-1579751626657-72bc17010498?w=800"
-    },
-    {
-        id: 9,
-        name: "Grilled Chicken",
-        price: 5.00,
-        category: "meals",
-        image: "https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=800"
-    },
-    {
-        id: 10,
-        name: "Special Steak",
-        price: 7.50,
-        category: "meals",
-        image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=800"
-    },
-    {
-        id: 11,
-        name: "Crispy Chicken",
-        price: 4.50,
-        category: "meals",
-        image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800"
-    },
-    {
-        id: 12,
-        name: "Chicken Rice",
-        price: 4.75,
-        category: "meals",
-        image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800"
-    },
-    {
-        id: 13,
-        name: "Cola",
-        price: 0.50,
-        category: "drinks",
-        image: "https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=800"
-    },
-    {
-        id: 14,
-        name: "Fresh Juice",
-        price: 1.50,
-        category: "drinks",
-        image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=800"
-    },
-    {
-        id: 15,
-        name: "Lemon Mint",
-        price: 1.75,
-        category: "drinks",
-        image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=800"
-    },
-    {
-        id: 16,
-        name: "Iced Coffee",
-        price: 2.00,
-        category: "drinks",
-        image: "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=800"
-    }
-];
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+:root {
+    --dark: #111111;
+    --dark-2: #1a1a1a;
+    --orange: #ff6b00;
+    --orange-light: #ff8c2a;
+    --gold: #ffb703;
+    --cream: #fff8ef;
+    --white: #ffffff;
+    --text: #171717;
+    --muted: #777777;
+    --border: #eeeeee;
+}
 
-let cart = [];
-
-
-/* إضافة منتج */
-
-function addToCart(id) {
-
-    const product = products.find(item => item.id === id);
-
-    if (!product) return;
-
-    const existing = cart.find(item => item.id === id);
-
-    if (existing) {
-        existing.quantity++;
-    } else {
-        cart.push({
-            ...product,
-            quantity: 1
-        });
-    }
-
-    updateCart();
-
+body {
+    font-family: "Cairo", sans-serif;
+    background: var(--cream);
+    color: var(--text);
 }
 
 
-/* تحديث السلة */
+/* =========================
+   HEADER
+========================= */
 
-function updateCart() {
+.header {
+    height: 78px;
+    background: rgba(17, 17, 17, 0.97);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 7%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+}
 
-    const cartCount = document.getElementById("cart-count");
-    const cartItems = document.getElementById("cart-items");
-    const cartTotal = document.getElementById("cart-total");
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+}
 
-    const totalQuantity = cart.reduce(
-        (sum, item) => sum + item.quantity,
-        0
+.logo-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--orange), var(--gold));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+    box-shadow: 0 5px 20px rgba(255, 107, 0, 0.3);
+}
+
+.logo h1 {
+    font-size: 20px;
+    line-height: 22px;
+    color: white;
+}
+
+.logo p {
+    font-size: 10px;
+    color: #aaa;
+}
+
+.cart-button {
+    border: none;
+    background: linear-gradient(135deg, var(--orange), var(--orange-light));
+    color: white;
+    padding: 11px 17px;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    box-shadow: 0 5px 20px rgba(255, 107, 0, 0.25);
+    transition: 0.25s;
+}
+
+.cart-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 0, 0.4);
+}
+
+.cart-button b {
+    background: white;
+    color: var(--orange);
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 500px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.85),
+            rgba(0, 0, 0, 0.45)
+        ),
+        url("https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?w=1600")
+        center/cover;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    color: white;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: var(--orange);
+    filter: blur(180px);
+    opacity: 0.15;
+    right: -150px;
+    bottom: -200px;
+}
+
+.hero-content {
+    max-width: 750px;
+    padding: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-badge {
+    display: inline-block;
+
+    background: rgba(255, 107, 0, 0.15);
+    border: 1px solid rgba(255, 107, 0, 0.6);
+
+    color: #ffb36b;
+
+    padding: 8px 20px;
+    border-radius: 30px;
+
+    font-size: 14px;
+}
+
+.hero h2 {
+    font-size: 58px;
+    margin: 25px 0 10px;
+    font-weight: 800;
+
+    background: linear-gradient(
+        90deg,
+        white,
+        #ffd2ad
     );
 
-    cartCount.textContent = totalQuantity;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
+.hero p {
+    font-size: 18px;
+    color: #e5e5e5;
+}
 
-    if (cart.length === 0) {
+.hero-button {
+    margin-top: 30px;
 
-        cartItems.innerHTML = `
-            <div class="empty-cart">
-                <div>🛒</div>
-                <h3>السلة فارغة</h3>
-                <p>أضف بعض المنتجات اللذيذة!</p>
-            </div>
-        `;
+    padding: 14px 35px;
 
-        cartTotal.textContent = "0.00 د.أ";
+    border: none;
 
-        return;
-    }
-
-
-    cartItems.innerHTML = cart.map(item => {
-
-        return `
-            <div class="cart-item">
-
-                <img
-                    class="cart-item-image"
-                    src="${item.image}"
-                    alt="${item.name}"
-                >
-
-                <div class="cart-item-info">
-
-                    <h4>${item.name}</h4>
-
-                    <strong>
-                        ${(item.price * item.quantity).toFixed(2)} د.أ
-                    </strong>
-
-                    <div class="quantity">
-
-                        <button onclick="changeQuantity(${item.id}, 1)">
-                            +
-                        </button>
-
-                        <span>${item.quantity}</span>
-
-                        <button onclick="changeQuantity(${item.id}, -1)">
-                            −
-                        </button>
-
-                    </div>
-
-                </div>
-
-                <button
-                    class="remove"
-                    onclick="removeFromCart(${item.id})"
-                >
-                    حذف
-                </button>
-
-            </div>
-        `;
-
-    }).join("");
-
-
-    const total = cart.reduce(
-        (sum, item) => sum + (item.price * item.quantity),
-        0
+    background: linear-gradient(
+        135deg,
+        var(--orange),
+        var(--gold)
     );
 
-    cartTotal.textContent = total.toFixed(2) + " د.أ";
+    color: white;
 
+    border-radius: 12px;
+
+    font-family: inherit;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 30px rgba(255, 107, 0, 0.35);
+
+    transition: 0.25s;
+}
+
+.hero-button:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow:
+        0 15px 40px rgba(255, 107, 0, 0.5);
 }
 
 
-/* تغيير الكمية */
+/* =========================
+   CATEGORIES
+========================= */
 
-function changeQuantity(id, amount) {
+.categories {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
 
-    const item = cart.find(item => item.id === id);
+    padding: 40px 20px 20px;
 
-    if (!item) return;
+    flex-wrap: wrap;
 
-    item.quantity += amount;
-
-    if (item.quantity <= 0) {
-        cart = cart.filter(item => item.id !== id);
-    }
-
-    updateCart();
-
+    background: var(--cream);
 }
 
+.category {
+    border: 2px solid transparent;
 
-/* حذف منتج */
+    background: white;
 
-function removeFromCart(id) {
+    padding: 11px 25px;
 
-    cart = cart.filter(item => item.id !== id);
+    border-radius: 40px;
 
-    updateCart();
+    font-family: inherit;
 
+    cursor: pointer;
+
+    font-weight: 700;
+
+    color: #555;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.06);
+
+    transition: 0.25s;
 }
 
+.category:hover {
+    border-color: var(--orange);
+    color: var(--orange);
 
-/* فتح السلة */
-
-function openCart() {
-
-    document
-        .getElementById("cart-overlay")
-        .classList.add("show");
-
+    transform: translateY(-2px);
 }
 
-
-/* إغلاق السلة */
-
-function closeCart(event) {
-
-    if (
-        event &&
-        event.target !== document.getElementById("cart-overlay")
-    ) {
-        return;
-    }
-
-    document
-        .getElementById("cart-overlay")
-        .classList.remove("show");
-
-}
-
-
-/* فلترة المنتجات */
-
-function filterProducts(category, button) {
-
-    const cards = document.querySelectorAll(".product-card");
-
-    const buttons = document.querySelectorAll(".category");
-
-    buttons.forEach(btn => {
-        btn.classList.remove("active");
-    });
-
-    button.classList.add("active");
-
-
-    cards.forEach(card => {
-
-        if (
-            category === "all" ||
-            card.dataset.category === category
-        ) {
-            card.style.display = "";
-        } else {
-            card.style.display = "none";
-        }
-
-    });
-
-}
-
-
-/* النزول للمنيو */
-
-function scrollToMenu() {
-
-    document
-        .getElementById("menu")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
-
-}
-
-
-/* إتمام الطلب */
-
-function checkout() {
-
-    if (cart.length === 0) {
-
-        alert("السلة فارغة، أضف منتجات أولاً.");
-
-        return;
-    }
-
-
-    let message = "مرحباً، أريد طلب:%0A%0A";
-
-    cart.forEach(item => {
-
-        message +=
-            `${item.name} × ${item.quantity} - ${(item.price * item.quantity).toFixed(2)} د.أ%0A`;
-
-    });
-
-
-    const total = cart.reduce(
-        (sum, item) => sum + (item.price * item.quantity),
-        0
+.category.active {
+    background: linear-gradient(
+        135deg,
+        var(--orange),
+        var(--gold)
     );
 
+    color: white;
 
-    message += `%0Aالمجموع: ${total.toFixed(2)} د.أ`;
+    border-color: transparent;
+
+    box-shadow:
+        0 8px 25px rgba(255, 107, 0, 0.3);
+}
 
 
-    // غيّر الرقم لاحقاً إلى رقم المطعم
-    const phone = "962781257466";
+/* =========================
+   PRODUCTS
+========================= */
 
-    window.open(
-        `https://wa.me/${phone}?text=${message}`,
-        "_blank"
-    );
+.products-container {
+    max-width: 1250px;
+
+    margin: auto;
+
+    padding: 30px 20px 80px;
+}
+
+.section-title {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.section-title span {
+    color: var(--orange);
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.section-title h2 {
+    font-size: 34px;
+
+    margin-top: 4px;
+
+    font-weight: 800;
+}
+
+.products {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 22px;
+}
+
+
+/* =========================
+   PRODUCT CARD
+========================= */
+
+.product-card {
+    background: white;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    border: 1px solid #eeeeee;
+
+    transition: 0.3s;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.04);
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 20px 45px rgba(0, 0, 0, 0.12);
+
+    border-color: rgba(255, 107, 0, 0.25);
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+
+    overflow: hidden;
+
+    position: relative;
+}
+
+.product-image::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.2),
+            transparent
+        );
+
+    pointer-events: none;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: 0.5s;
+}
+
+.product-card:hover img {
+    transform: scale(1.08);
+}
+
+.product-info {
+    padding: 18px;
+}
+
+.product-info h3 {
+    font-size: 18px;
+
+    margin-bottom: 6px;
+
+    font-weight: 800;
+}
+
+.product-info p {
+    font-size: 12px;
+
+    color: var(--muted);
+
+    line-height: 1.8;
+
+    min-height: 45px;
+}
+
+.product-bottom {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: 17px;
+}
+
+.product-bottom strong {
+    color: var(--orange);
+
+    font-size: 18px;
+
+    font-weight: 800;
+}
+
+.product-bottom button {
+    width: 42px;
+    height: 42px;
+
+    border: none;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--orange),
+            var(--gold)
+        );
+
+    color: white;
+
+    font-size: 27px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 15px rgba(255, 107, 0, 0.25);
+
+    transition: 0.25s;
+}
+
+.product-bottom button:hover {
+    transform: scale(1.12) rotate(5deg);
+
+    box-shadow:
+        0 10px 25px rgba(255, 107, 0, 0.4);
+}
+
+
+/* =========================
+   CART
+========================= */
+
+.cart-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(0, 0, 0, 0.65);
+
+    backdrop-filter: blur(4px);
+
+    z-index: 2000;
+
+    display: none;
+}
+
+.cart-overlay.show {
+    display: flex;
+
+    justify-content: flex-start;
+}
+
+.cart {
+    width: 450px;
+
+    max-width: 100%;
+
+    height: 100%;
+
+    background: #fff;
+
+    padding: 25px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
 
 }
-function filterProducts(category, button) {
 
-    const cards = document.querySelectorAll(".product-card");
-    const buttons = document.querySelectorAll(".category");
+.cart-header {
+    display: flex;
 
-    buttons.forEach(btn => {
-        btn.classList.remove("active");
-    });
+    justify-content: space-between;
 
-    button.classList.add("active");
+    align-items: center;
 
-    cards.forEach(card => {
+    padding-bottom: 20px;
 
-        if (category === "all" || card.dataset.category === category) {
-            card.style.display = "block";
-        } else {
-            card.style.display = "none";
-        }
+    border-bottom: 1px solid var(--border);
+}
 
-    });
+.cart-header h2 {
+    font-size: 21px;
+
+    font-weight: 800;
+}
+
+.cart-header button {
+    border: none;
+
+    background: #f4f4f4;
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+
+    font-size: 25px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.cart-header button:hover {
+    background: #ffe5d0;
+
+    color: var(--orange);
+}
+
+.cart-items {
+    flex: 1;
+
+    overflow-y: auto;
+
+    padding: 15px 0;
+}
+
+.empty-cart {
+    text-align: center;
+
+    margin-top: 100px;
+
+    color: var(--muted);
+}
+
+.empty-cart div {
+    font-size: 55px;
+
+    margin-bottom: 10px;
+}
+
+.cart-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 13px 0;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.cart-item-image {
+    width: 65px;
+    height: 65px;
+
+    object-fit: cover;
+
+    border-radius: 12px;
+}
+
+.cart-item-info {
+    flex: 1;
+}
+
+.cart-item-info h4 {
+    font-size: 14px;
+}
+
+.cart-item-info strong {
+    color: var(--orange);
+
+    font-size: 13px;
+}
+
+.quantity {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 6px;
+}
+
+.quantity button {
+    border: none;
+
+    background: #f4f4f4;
+
+    width: 27px;
+    height: 27px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+}
+
+.quantity button:hover {
+    background: #ffe5d0;
+
+    color: var(--orange);
+}
+
+.remove {
+    border: none;
+
+    background: none;
+
+    color: #ef4444;
+
+    cursor: pointer;
+}
+
+.cart-footer {
+    border-top: 1px solid var(--border);
+
+    padding-top: 20px;
+}
+
+.total {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 15px;
+}
+
+.total strong {
+    color: var(--orange);
+
+    font-size: 21px;
+}
+
+.checkout-button {
+    width: 100%;
+
+    border: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #111111,
+            #292929
+        );
+
+    color: white;
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    font-family: inherit;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+}
+
+.checkout-button:hover {
+    background:
+        linear-gradient(
+            135deg,
+            var(--orange),
+            var(--gold)
+        );
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    background:
+        linear-gradient(
+            135deg,
+            #0d0d0d,
+            #1b1b1b
+        );
+
+    color: white;
+
+    text-align: center;
+
+    padding: 45px 20px;
+}
+
+footer h3 {
+    color: var(--orange);
+
+    font-size: 22px;
+}
+
+footer p {
+    color: #bbb;
+
+    margin: 6px 0 15px;
+}
+
+footer small {
+    color: #777;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1000px) {
+
+    .products {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .header {
+        padding: 0 18px;
+    }
+
+    .hero {
+        min-height: 420px;
+    }
+
+    .hero h2 {
+        font-size: 40px;
+    }
+
+    .hero p {
+        font-size: 15px;
+    }
+
+    .products {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 14px;
+    }
+
+    .product-image {
+        height: 160px;
+    }
+
+    .product-info {
+        padding: 13px;
+    }
+
+    .product-info h3 {
+        font-size: 15px;
+    }
+
+}
+
+@media (max-width: 450px) {
+
+    .products {
+        grid-template-columns: 1fr;
+    }
+
+    .product-image {
+        height: 220px;
+    }
+
+    .hero h2 {
+        font-size: 34px;
+    }
+
+    .category {
+        padding: 9px 17px;
+    }
+
+    .cart {
+        width: 100%;
+    }
+
 }
