@@ -1,78 +1,103 @@
 let cart = [];
 
-// إضافة منتج للسلة
 function addToCart(name, price) {
     let existingItem = cart.find(item => item.name === name);
     if (existingItem) {
         existingItem.quantity += 1;
     } else {
-        cart.push({ name: name, price: price, quantity: 1 });
+        cart.push({ name, price, quantity: 1 });
     }
-    
     updateCartUI();
-    showToast(`تمت إضافة ${name} لسلتك 🛒`);
 }
 
-// تحديث الواجهة الخاصة بالسلة
-function updateCartUI() {
-    let cartBar = document.getElementById('cartBar');
-    let cartCount = document.getElementById('cartCount');
-    let cartTotal = document.getElementById('cartTotal');
-
-    let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    let totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-    if (totalItems > 0) {
-        cartBar.style.display = 'flex';
-        cartCount.textContent = `${totalItems} منتجات مضافة`;
-        cartTotal.textContent = `${totalPrice.toFixed(2)} JOD`;
-    } else {
-        cartBar.style.display = 'none';
+function updateQuantity(name, change) {
+    let item = cart.find(item => item.name === name);
+    if (item) {
+        item.quantity += change;
+        if (item.quantity <= 0) {
+            cart = cart.filter(i => i.name !== name);
+        }
     }
+    updateCartUI();
 }
 
-// عرض تنبيه احترافي (Toast)
-function showToast(message) {
-    let toast = document.getElementById('toast');
-    toast.textContent = message;
-    toast.className = "toast show";
-    setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 2600);
+function updateCartUI() {
+    let cartBar = document.getElementById('cart-bar');
+    let cartCount = document.getElementById('cart-count');
+    let cartTotal = document.getElementById('cart-total');
+    let modalTotal = document.getElementById('modal-total');
+    let itemsContainer = document.getElementById('cart-items-container');
+
+    let totalCount = 0;
+    let totalPrice = 0;
+    itemsContainer.innerHTML = '';
+
+    if (cart.length === 0) {
+        cartBar.classList.add('translate-y-28');
+        itemsContainer.innerHTML = '<p class="text-center text-gray-400 py-8 text-sm">السلة فارغة حالياً 🍔</p>';
+    } else {
+        cartBar.classList.remove('translate-y-28');
+        cart.forEach(item => {
+            totalCount += item.quantity;
+            totalPrice += item.price * item.quantity;
+
+            itemsContainer.innerHTML += `
+                <div class="flex justify-between items-center pt-3 first:pt-0">
+                    <div>
+                        <h4 class="font-bold text-sm">${item.name}</h4>
+                        <p class="text-xs text-amber-400 font-semibold">${(item.price * item.quantity).toFixed(2)} د.أ</p>
+                    </div>
+                    <div class="flex items-center gap-2 bg-gray-900 px-3 py-1 rounded-full border border-gray-700">
+                        <button onclick="updateQuantity('${item.name}', -1)" class="text-red-400 hover:text-red-300 font-bold px-1.5"><i class="fa-solid fa-minus text-xs"></i></button>
+                        <span class="font-black text-sm w-5 text-center">${item.quantity}</span>
+                        <button onclick="updateQuantity('${item.name}', 1)" class="text-green-400 hover:text-green-300 font-bold px-1.5"><i class="fa-solid fa-plus text-xs"></i></button>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    cartCount.innerText = totalCount;
+    cartTotal.innerText = totalPrice.toFixed(2);
+    modalTotal.innerText = totalPrice.toFixed(2);
 }
 
-// فتح نافذة إدخال رقم الطاولة
-function openCheckoutModal() {
-    document.getElementById('checkoutModal').style.display = 'flex';
+function toggleCartModal() {
+    let modal = document.getElementById('cart-modal');
+    modal.classList.toggle('hidden');
 }
 
-// إغلاق نافذة رقم الطاولة
-function closeCheckoutModal() {
-    document.getElementById('checkoutModal').style.display = 'none';
-}
-
-// إرسال الطلب مباشرة إلى الواتساب
-function sendOrderToWhatsApp() {
-    let tableNumber = document.getElementById('tableNumber').value;
+function sendToWhatsApp() {
+    let tableNumber = document.getElementById('table-number').value.trim();
     
     if (!tableNumber) {
-        showToast("⚠️ يرجى إدخال رقم الطاولة أولاً!");
+        alert('⚠️ الرجاء إدخال رقم الطاولة أولاً!');
+        document.getElementById('table-number').focus();
         return;
     }
 
-    let message = `🔥 *طلب جديد لمطعم اللحظة*:\n📍 *رقم الطاولة:* ${tableNumber}\n\n`;
-    
-    cart.forEach(item => {
-        message += `▪️ ${item.name} (العدد: ${item.quantity}) - ${(item.price * item.quantity).toFixed(2)} JOD\n`;
+    if (cart.length === 0) {
+        alert('⚠️ السلة فارغة!');
+        return;
+    }
+
+    let restaurantPhone = "962790000000"; // استبدله برقم واتساب المطعم الحقيقي
+    let message = `🛒 *طلب جديد عبر MenuQR*\n`;
+    message += `🪑 *رقم الطاولة:* ${tableNumber}\n`;
+    message += `------------------------\n`;
+
+    let total = 0;
+    cart.forEach((item, index) => {
+        let itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        message += `${index + 1}. ${item.name} (×${item.quantity}) - ${itemTotal.toFixed(2)} د.أ\n`;
     });
 
-    let totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    message += `\n💰 *المجموع الكلي:* ${totalPrice.toFixed(2)} JOD`;
+    message += `------------------------\n`;
+    message += `💰 *المجموع الكلي:* ${total.toFixed(2)} د.أ`;
 
-    // رقم واتساب المطعم
-    let restaurantWhatsApp = "962700000000"; 
     let encodedMessage = encodeURIComponent(message);
-    
-    let whatsappURL = `https://wa.me/${restaurantWhatsApp}?text=${encodedMessage}`;
-    
+    let whatsappURL = `https://wa.me/${restaurantPhone}?text=${encodedMessage}`;
+
     window.open(whatsappURL, '_blank');
-    closeCheckoutModal();
 }
