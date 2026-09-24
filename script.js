@@ -374,3 +374,24 @@ function checkout() {
     );
 
 }
+function filterProducts(category, button) {
+
+    const cards = document.querySelectorAll(".product-card");
+    const buttons = document.querySelectorAll(".category");
+
+    buttons.forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    cards.forEach(card => {
+
+        if (category === "all" || card.dataset.category === category) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+
+    });
+}
