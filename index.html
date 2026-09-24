@@ -3,76 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Burger House - MenuQR</title>
+    <title>منيو المقهى العصري - Artisan Coffee</title>
     <link rel="stylesheet" href="style.css">
+    <!-- خط عربي أنيق مريح للعين -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- الهيدر -->
-    <header>
-        <div class="brand-logo">MenuQR</div>
-        <div class="restaurant-name">مطعم برجر هاوس - Burger House</div>
+    <!-- رأس الصفحة -->
+    <header class="header">
+        <div class="header-content">
+            <h1>Artisan Coffee ☕</h1>
+            <p>تجربة قهوة استثنائية ومحمصة بكل حب</p>
+        </div>
     </header>
 
-    <!-- أقسام المنيو -->
-    <div class="categories" id="categories-container">
-    <button class="cat-btn active" onclick="filterMenu('الكل')">الكل</button>
-    <button class="cat-btn" onclick="filterMenu('برجر')">برجر</button>
-    <button class="cat-btn" onclick="filterMenu('دجاج')">دجاج</button>
-    <button class="cat-btn" onclick="filterMenu('مشروبات')">مشروبات</button>
-    <button class="cat-btn" onclick="filterMenu('إضافات')">إضافات ومقبلات</button>
-    </div>
-
-    <!-- قسم قائمة الطعام (الصفحة الرئيسية) -->
-    <div class="menu-container" id="menu-section">
-        <div class="section-title">قائمة الطعام</div>
-        <div id="products-list">
-            <!-- سيتم تعبئة المنتجات تلقائياً عبر JavaScript -->
-        </div>
-    </div>
-
-    <!-- قسم سلة المشتريات (مخفي افتراضياً ويظهر عند النقر على السلة) -->
-    <!-- قسم سلة المشتريات -->
-<div class="cart-section" id="cart-section">
-    <div class="section-title">سلة المشتريات</div>
-    <div id="cart-items-list">
-        <!-- المنتجات المضافة للسلة ستظهر هنا -->
-    </div>
-
-    <div class="cart-summary" id="cart-summary-box" style="display: none;">
+    <!-- محتوى المنيو -->
+    <main class="container">
         
-        <!-- خانة إدخال رقم الطاولة -->
-        <div style="margin-bottom: 15px;">
-            <label for="table-number" style="display: block; font-size: 14px; margin-bottom: 5px; color: #f39c12;">رقم الطاولة (إجباري),لاستلام الطلب شكرا لتعاونكم :</label>
-            <input type="number" id="table-number" placeholder="مثال: 5" style="width: 100%; padding: 10px; background-color: #2c2c2c; border: 1px solid #444; color: white; border-radius: 6px; font-size: 15px;">
-        </div>
+        <!-- قسم المشروبات الساخنة -->
+        <section class="category-section">
+            <h2>☕ المشروبات الساخنة</h2>
+            <div class="items-grid">
+                
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h3>لاتيه فانيلا</h3>
+                        <p>إسبريسو غني مع حليب مبخر ونكهة الفانيلا الطبيعية</p>
+                        <span class="price">3.50 JOD</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('لاتيه فانيلا', 3.50)">إضافة للسلة</button>
+                </div>
 
-        <div class="cart-total">
-            <span>المجموع:</span>
-            <span id="cart-total-price">0.00 د.أ</span>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h3>سبانيش لاتيه</h3>
+                        <p>إسبريسو، حليب مكثف محلى، ومذاق كريمي ساحر</p>
+                        <span class="price">3.75 JOD</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('سبانيش لاتيه', 3.75)">إضافة للسلة</button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- قسم المخبوزات والحلويات -->
+        <section class="category-section">
+            <h2>🥐 المخبوزات والحلويات</h2>
+            <div class="items-grid">
+                
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h3>كرواسون بالزبدة</h3>
+                        <p>طازج، مقرمش، ومخبوز يومياً بطريقة فرانسية أصيلة</p>
+                        <span class="price">2.00 JOD</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('كرواسون بالزبدة', 2.00)">إضافة للسلة</button>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-info">
+                        <h3>تشيز كيك البقان</h3>
+                        <p>طبقات ناعمة مع صوص الكراميل وجوز البقان المحمص</p>
+                        <span class="price">4.25 JOD</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('تشيز كيك البقان', 4.25)">إضافة للسلة</button>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- سلة المشتريات العائمة -->
+    <div class="cart-bar" id="cartBar">
+        <div class="cart-info">
+            <span id="cartCount">0 أطباق</span>
+            <span id="cartTotal">0.00 JOD</span>
         </div>
-        <button class="checkout-btn" onclick="sendToWhatsApp()">إرسال الطلب عبر واتساب 📲</button>
+        <button class="checkout-btn" onclick="openCheckoutModal()">إتمام الطلب عبر الواتساب</button>
     </div>
-</div>
 
-    <!-- شريط التنقل السفلي -->
-    <div class="bottom-nav">
-        <button class="nav-item active" onclick="switchTab('menu')" id="nav-menu">
-            🏠<br>الرئيسية
-        </button>
-        <div class="nav-cart-wrapper" style="display: inline-block;">
-            <button class="nav-item" onclick="switchTab('cart')" id="nav-cart">
-                🛒<br>السلة
-            </button>
-            <span class="cart-badge" id="cart-count" style="display: none;">0</span>
+    <!-- نافذة إدخال رقم الطاولة -->
+    <div class="modal" id="checkoutModal">
+        <div class="modal-content">
+            <h3>تأكيد الطلب</h3>
+            <p>الرجاء إدخال رقم الطاولة الحالية لإرسال الطلب:</p>
+            <input type="number" id="tableNumber" placeholder="مثال: الطاولة رقم 5" min="1">
+            <div class="modal-buttons">
+                <button class="confirm-btn" onclick="sendOrderToWhatsApp()">إرسال الطلب</button>
+                <button class="cancel-btn" onclick="closeCheckoutModal()">إلغاء</button>
+            </div>
         </div>
     </div>
 
-    <!-- ملف السكريبت -->
+    <!-- نظام التنبيهات المخصص (Toast) -->
+    <div id="toast" class="toast">تمت الإضافة بنجاح ✨</div>
+
     <script src="script.js"></script>
-<!-- عنصر التنبيه العصري (Toast Notification) -->
-<div id="toast-notification" style="position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(100px); background-color: #e74c3c; color: white; padding: 12px 20px; border-radius: 30px; font-size: 14px; font-weight: bold; box-shadow: 0 4px 12px rgba(0,0,0,0.3); transition: transform 0.3s ease, opacity 0.3s ease; opacity: 0; z-index: 1000; text-align: center; pointer-events: none;">
-    ⚠️ يرجى إدخال رقم الطاولة أولاً!
-</div>
 </body>
 </html>
