@@ -1,103 +1,376 @@
+const products = [
+    {
+        id: 1,
+        name: "Classic Burger",
+        price: 2.50,
+        category: "burger",
+        image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800"
+    },
+    {
+        id: 2,
+        name: "Cheese Burger",
+        price: 3.00,
+        category: "burger",
+        image: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=800"
+    },
+    {
+        id: 3,
+        name: "Double Burger",
+        price: 3.75,
+        category: "burger",
+        image: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=800"
+    },
+    {
+        id: 4,
+        name: "Chicken Burger",
+        price: 2.75,
+        category: "burger",
+        image: "https://images.unsplash.com/photo-1600891964092-4316c288032e?w=800"
+    },
+    {
+        id: 5,
+        name: "Margherita Pizza",
+        price: 3.50,
+        category: "pizza",
+        image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=800"
+    },
+    {
+        id: 6,
+        name: "Pepperoni Pizza",
+        price: 4.00,
+        category: "pizza",
+        image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800"
+    },
+    {
+        id: 7,
+        name: "Chicken Pizza",
+        price: 4.25,
+        category: "pizza",
+        image: "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=800"
+    },
+    {
+        id: 8,
+        name: "Vegetable Pizza",
+        price: 3.75,
+        category: "pizza",
+        image: "https://images.unsplash.com/photo-1579751626657-72bc17010498?w=800"
+    },
+    {
+        id: 9,
+        name: "Grilled Chicken",
+        price: 5.00,
+        category: "meals",
+        image: "https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=800"
+    },
+    {
+        id: 10,
+        name: "Special Steak",
+        price: 7.50,
+        category: "meals",
+        image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=800"
+    },
+    {
+        id: 11,
+        name: "Crispy Chicken",
+        price: 4.50,
+        category: "meals",
+        image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800"
+    },
+    {
+        id: 12,
+        name: "Chicken Rice",
+        price: 4.75,
+        category: "meals",
+        image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800"
+    },
+    {
+        id: 13,
+        name: "Cola",
+        price: 0.50,
+        category: "drinks",
+        image: "https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=800"
+    },
+    {
+        id: 14,
+        name: "Fresh Juice",
+        price: 1.50,
+        category: "drinks",
+        image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=800"
+    },
+    {
+        id: 15,
+        name: "Lemon Mint",
+        price: 1.75,
+        category: "drinks",
+        image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=800"
+    },
+    {
+        id: 16,
+        name: "Iced Coffee",
+        price: 2.00,
+        category: "drinks",
+        image: "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=800"
+    }
+];
+
+
 let cart = [];
 
-function addToCart(name, price) {
-    let existingItem = cart.find(item => item.name === name);
-    if (existingItem) {
-        existingItem.quantity += 1;
+
+/* إضافة منتج */
+
+function addToCart(id) {
+
+    const product = products.find(item => item.id === id);
+
+    if (!product) return;
+
+    const existing = cart.find(item => item.id === id);
+
+    if (existing) {
+        existing.quantity++;
     } else {
-        cart.push({ name, price, quantity: 1 });
-    }
-    updateCartUI();
-}
-
-function updateQuantity(name, change) {
-    let item = cart.find(item => item.name === name);
-    if (item) {
-        item.quantity += change;
-        if (item.quantity <= 0) {
-            cart = cart.filter(i => i.name !== name);
-        }
-    }
-    updateCartUI();
-}
-
-function updateCartUI() {
-    let cartBar = document.getElementById('cart-bar');
-    let cartCount = document.getElementById('cart-count');
-    let cartTotal = document.getElementById('cart-total');
-    let modalTotal = document.getElementById('modal-total');
-    let itemsContainer = document.getElementById('cart-items-container');
-
-    let totalCount = 0;
-    let totalPrice = 0;
-    itemsContainer.innerHTML = '';
-
-    if (cart.length === 0) {
-        cartBar.classList.add('translate-y-28');
-        itemsContainer.innerHTML = '<p class="text-center text-gray-400 py-8 text-sm">السلة فارغة حالياً 🍔</p>';
-    } else {
-        cartBar.classList.remove('translate-y-28');
-        cart.forEach(item => {
-            totalCount += item.quantity;
-            totalPrice += item.price * item.quantity;
-
-            itemsContainer.innerHTML += `
-                <div class="flex justify-between items-center pt-3 first:pt-0">
-                    <div>
-                        <h4 class="font-bold text-sm">${item.name}</h4>
-                        <p class="text-xs text-amber-400 font-semibold">${(item.price * item.quantity).toFixed(2)} د.أ</p>
-                    </div>
-                    <div class="flex items-center gap-2 bg-gray-900 px-3 py-1 rounded-full border border-gray-700">
-                        <button onclick="updateQuantity('${item.name}', -1)" class="text-red-400 hover:text-red-300 font-bold px-1.5"><i class="fa-solid fa-minus text-xs"></i></button>
-                        <span class="font-black text-sm w-5 text-center">${item.quantity}</span>
-                        <button onclick="updateQuantity('${item.name}', 1)" class="text-green-400 hover:text-green-300 font-bold px-1.5"><i class="fa-solid fa-plus text-xs"></i></button>
-                    </div>
-                </div>
-            `;
+        cart.push({
+            ...product,
+            quantity: 1
         });
     }
 
-    cartCount.innerText = totalCount;
-    cartTotal.innerText = totalPrice.toFixed(2);
-    modalTotal.innerText = totalPrice.toFixed(2);
+    updateCart();
+
 }
 
-function toggleCartModal() {
-    let modal = document.getElementById('cart-modal');
-    modal.classList.toggle('hidden');
-}
 
-function sendToWhatsApp() {
-    let tableNumber = document.getElementById('table-number').value.trim();
-    
-    if (!tableNumber) {
-        alert('⚠️ الرجاء إدخال رقم الطاولة أولاً!');
-        document.getElementById('table-number').focus();
-        return;
-    }
+/* تحديث السلة */
+
+function updateCart() {
+
+    const cartCount = document.getElementById("cart-count");
+    const cartItems = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+
+    const totalQuantity = cart.reduce(
+        (sum, item) => sum + item.quantity,
+        0
+    );
+
+    cartCount.textContent = totalQuantity;
+
 
     if (cart.length === 0) {
-        alert('⚠️ السلة فارغة!');
+
+        cartItems.innerHTML = `
+            <div class="empty-cart">
+                <div>🛒</div>
+                <h3>السلة فارغة</h3>
+                <p>أضف بعض المنتجات اللذيذة!</p>
+            </div>
+        `;
+
+        cartTotal.textContent = "0.00 د.أ";
+
         return;
     }
 
-    let restaurantPhone = "962790000000"; // استبدله برقم واتساب المطعم الحقيقي
-    let message = `🛒 *طلب جديد عبر MenuQR*\n`;
-    message += `🪑 *رقم الطاولة:* ${tableNumber}\n`;
-    message += `------------------------\n`;
 
-    let total = 0;
-    cart.forEach((item, index) => {
-        let itemTotal = item.price * item.quantity;
-        total += itemTotal;
-        message += `${index + 1}. ${item.name} (×${item.quantity}) - ${itemTotal.toFixed(2)} د.أ\n`;
+    cartItems.innerHTML = cart.map(item => {
+
+        return `
+            <div class="cart-item">
+
+                <img
+                    class="cart-item-image"
+                    src="${item.image}"
+                    alt="${item.name}"
+                >
+
+                <div class="cart-item-info">
+
+                    <h4>${item.name}</h4>
+
+                    <strong>
+                        ${(item.price * item.quantity).toFixed(2)} د.أ
+                    </strong>
+
+                    <div class="quantity">
+
+                        <button onclick="changeQuantity(${item.id}, 1)">
+                            +
+                        </button>
+
+                        <span>${item.quantity}</span>
+
+                        <button onclick="changeQuantity(${item.id}, -1)">
+                            −
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <button
+                    class="remove"
+                    onclick="removeFromCart(${item.id})"
+                >
+                    حذف
+                </button>
+
+            </div>
+        `;
+
+    }).join("");
+
+
+    const total = cart.reduce(
+        (sum, item) => sum + (item.price * item.quantity),
+        0
+    );
+
+    cartTotal.textContent = total.toFixed(2) + " د.أ";
+
+}
+
+
+/* تغيير الكمية */
+
+function changeQuantity(id, amount) {
+
+    const item = cart.find(item => item.id === id);
+
+    if (!item) return;
+
+    item.quantity += amount;
+
+    if (item.quantity <= 0) {
+        cart = cart.filter(item => item.id !== id);
+    }
+
+    updateCart();
+
+}
+
+
+/* حذف منتج */
+
+function removeFromCart(id) {
+
+    cart = cart.filter(item => item.id !== id);
+
+    updateCart();
+
+}
+
+
+/* فتح السلة */
+
+function openCart() {
+
+    document
+        .getElementById("cart-overlay")
+        .classList.add("show");
+
+}
+
+
+/* إغلاق السلة */
+
+function closeCart(event) {
+
+    if (
+        event &&
+        event.target !== document.getElementById("cart-overlay")
+    ) {
+        return;
+    }
+
+    document
+        .getElementById("cart-overlay")
+        .classList.remove("show");
+
+}
+
+
+/* فلترة المنتجات */
+
+function filterProducts(category, button) {
+
+    const cards = document.querySelectorAll(".product-card");
+
+    const buttons = document.querySelectorAll(".category");
+
+    buttons.forEach(btn => {
+        btn.classList.remove("active");
     });
 
-    message += `------------------------\n`;
-    message += `💰 *المجموع الكلي:* ${total.toFixed(2)} د.أ`;
+    button.classList.add("active");
 
-    let encodedMessage = encodeURIComponent(message);
-    let whatsappURL = `https://wa.me/${restaurantPhone}?text=${encodedMessage}`;
 
-    window.open(whatsappURL, '_blank');
+    cards.forEach(card => {
+
+        if (
+            category === "all" ||
+            card.dataset.category === category
+        ) {
+            card.style.display = "";
+        } else {
+            card.style.display = "none";
+        }
+
+    });
+
+}
+
+
+/* النزول للمنيو */
+
+function scrollToMenu() {
+
+    document
+        .getElementById("menu")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+/* إتمام الطلب */
+
+function checkout() {
+
+    if (cart.length === 0) {
+
+        alert("السلة فارغة، أضف منتجات أولاً.");
+
+        return;
+    }
+
+
+    let message = "مرحباً، أريد طلب:%0A%0A";
+
+    cart.forEach(item => {
+
+        message +=
+            `${item.name} × ${item.quantity} - ${(item.price * item.quantity).toFixed(2)} د.أ%0A`;
+
+    });
+
+
+    const total = cart.reduce(
+        (sum, item) => sum + (item.price * item.quantity),
+        0
+    );
+
+
+    message += `%0Aالمجموع: ${total.toFixed(2)} د.أ`;
+
+
+    // غيّر الرقم لاحقاً إلى رقم المطعم
+    const phone = "962700000000";
+
+    window.open(
+        `https://wa.me/${phone}?text=${message}`,
+        "_blank"
+    );
+
 }
