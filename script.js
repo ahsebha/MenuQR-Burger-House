@@ -10,7 +10,7 @@ function addToCart(name, price) {
     }
     
     updateCartUI();
-    showToast(`تمت إضافة ${name} إلى سلتك ✨`);
+    showToast(`تمت إضافة ${name} لسلتك 🛒`);
 }
 
 // تحديث الواجهة الخاصة بالسلة
@@ -31,12 +31,12 @@ function updateCartUI() {
     }
 }
 
-// عرض تنبيه احترافي (Toast) بدلاً من نافذة المتصفح المزعجة
+// عرض تنبيه احترافي (Toast)
 function showToast(message) {
     let toast = document.getElementById('toast');
     toast.textContent = message;
     toast.className = "toast show";
-    setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 2500);
+    setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 2600);
 }
 
 // فتح نافذة إدخال رقم الطاولة
@@ -58,7 +58,7 @@ function sendOrderToWhatsApp() {
         return;
     }
 
-    let message = `🛒 *طلب جديد من الزبون*:\n📍 *رقم الطاولة:* ${tableNumber}\n\n`;
+    let message = `🔥 *طلب جديد لمطعم اللحظة*:\n📍 *رقم الطاولة:* ${tableNumber}\n\n`;
     
     cart.forEach(item => {
         message += `▪️ ${item.name} (العدد: ${item.quantity}) - ${(item.price * item.quantity).toFixed(2)} JOD\n`;
@@ -67,7 +67,7 @@ function sendOrderToWhatsApp() {
     let totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     message += `\n💰 *المجموع الكلي:* ${totalPrice.toFixed(2)} JOD`;
 
-    // استبدل الرقم أدناه برقم الواتساب الخاص بالمطعم
+    // رقم واتساب المطعم
     let restaurantWhatsApp = "962700000000"; 
     let encodedMessage = encodeURIComponent(message);
     
