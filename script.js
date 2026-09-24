@@ -366,7 +366,7 @@ function checkout() {
 
 
     // غيّر الرقم لاحقاً إلى رقم المطعم
-    const phone = "962700000000";
+    const phone = "962781257466";
 
     window.open(
         `https://wa.me/${phone}?text=${message}`,
