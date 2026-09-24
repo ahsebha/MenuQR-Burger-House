@@ -7,15 +7,13 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
-        body { font-family: 'Cairo', sans-serif; }
-    </style>
+    <!-- ربط ملف الـ CSS الخارجي -->
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-900 text-white pb-24">
+<body class="bg-gray-900 text-white pb-32">
 
     <!-- رأس الصفحة (Header) -->
-    <header class="bg-gray-800 shadow-md sticky top-0 z-50 border-b border-gray-700">
+    <header class="bg-gray-800 shadow-md sticky top-0 z-40 border-b border-gray-700">
         <div class="max-w-md mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center space-x-3 space-x-reverse">
                 <div class="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center text-gray-900 font-black text-xl">
@@ -33,7 +31,7 @@
     </header>
 
     <!-- الأقسام (Categories Bar) -->
-    <nav class="max-w-md mx-auto px-4 py-3 overflow-x-auto whitespace-nowrap scrollbar-none flex gap-2 bg-gray-900 sticky top-[61px] z-40 border-b border-gray-800">
+    <nav class="max-w-md mx-auto px-4 py-3 overflow-x-auto whitespace-nowrap scrollbar-none flex gap-2 bg-gray-900 sticky top-[61px] z-30 border-b border-gray-800">
         <a href="#burgers" class="bg-amber-500 text-gray-900 font-bold px-4 py-1.5 rounded-full text-sm shadow">🍔 برجر</a>
         <a href="#chicken" class="bg-gray-800 text-gray-300 hover:bg-gray-700 font-medium px-4 py-1.5 rounded-full text-sm">🍗 دجاج</a>
         <a href="#drinks" class="bg-gray-800 text-gray-300 hover:bg-gray-700 font-medium px-4 py-1.5 rounded-full text-sm">🥤 مشروبات</a>
@@ -47,34 +45,32 @@
         <section id="burgers">
             <h2 class="text-xl font-black text-amber-400 mb-3 border-r-4 border-amber-500 pr-2">البرجر المميز</h2>
             <div class="space-y-3">
-                <!-- منتج 1 -->
                 <div class="bg-gray-800 rounded-2xl p-3 flex gap-3 shadow-lg border border-gray-700">
-                    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=300&q=80" alt="سماش برجر" class="w-24 h-24 object-cover rounded-xl">
+                    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=300&q=80" alt="دبل سماش برجر" class="w-24 h-24 object-cover rounded-xl">
                     <div class="flex-1 flex flex-col justify-between">
                         <div>
-                            <h3 class="font-bold text-base">دبل سماش برجر</h3>
-                            <p class="text-xs text-gray-400 mt-0.5 line-clamp-2">لحم أنغوس طازج، جبنة تشيدر، صوص الحوس الخاص.</p>
+                            <h3 class="font-bold text-base product-name">دبل سماش برجر</h3>
+                            <p class="text-xs text-gray-400 mt-0.5 line-clamp-2">لحم أنغوس طازج، جبنة تشيدر، صوص الهوم الخاص.</p>
                         </div>
                         <div class="flex justify-between items-center mt-2">
-                            <span class="font-black text-amber-400 text-sm">6.50 د.أ</span>
-                            <button class="bg-amber-500 hover:bg-amber-600 text-gray-900 w-8 h-8 rounded-full flex items-center justify-center font-bold shadow transition-transform active:scale-95">
+                            <span class="font-black text-amber-400 text-sm"><span class="product-price">6.50</span> د.أ</span>
+                            <button onclick="addToCart('دبل سماش برجر', 6.50)" class="bg-amber-500 hover:bg-amber-600 text-gray-900 w-8 h-8 rounded-full flex items-center justify-center font-bold shadow transition-transform active:scale-95">
                                 <i class="fa-solid fa-plus"></i>
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- منتج 2 -->
                 <div class="bg-gray-800 rounded-2xl p-3 flex gap-3 shadow-lg border border-gray-700">
-                    <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=300&q=80" alt="مشوي برجر" class="w-24 h-24 object-cover rounded-xl">
+                    <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=300&q=80" alt="رويال بايكون برجر" class="w-24 h-24 object-cover rounded-xl">
                     <div class="flex-1 flex flex-col justify-between">
                         <div>
-                            <h3 class="font-bold text-base">رويال بايكون برجر</h3>
+                            <h3 class="font-bold text-base product-name">رويال بايكون برجر</h3>
                             <p class="text-xs text-gray-400 mt-0.5 line-clamp-2">لحم بقر مدخن، بايكون مقرمش، صوص باربكيو.</p>
                         </div>
                         <div class="flex justify-between items-center mt-2">
-                            <span class="font-black text-amber-400 text-sm">7.25 د.أ</span>
-                            <button class="bg-amber-500 hover:bg-amber-600 text-gray-900 w-8 h-8 rounded-full flex items-center justify-center font-bold shadow transition-transform active:scale-95">
+                            <span class="font-black text-amber-400 text-sm"><span class="product-price">7.25</span> د.أ</span>
+                            <button onclick="addToCart('رويال بايكون برجر', 7.25)" class="bg-amber-500 hover:bg-amber-600 text-gray-900 w-8 h-8 rounded-full flex items-center justify-center font-bold shadow transition-transform active:scale-95">
                                 <i class="fa-solid fa-plus"></i>
                             </button>
                         </div>
@@ -88,15 +84,15 @@
             <h2 class="text-xl font-black text-amber-400 mb-3 border-r-4 border-amber-500 pr-2">وجبات الدجاج</h2>
             <div class="space-y-3">
                 <div class="bg-gray-800 rounded-2xl p-3 flex gap-3 shadow-lg border border-gray-700">
-                    <img src="https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?auto=format&fit=crop&w=300&q=80" alt="كريسبي دجاج" class="w-24 h-24 object-cover rounded-xl">
+                    <img src="https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?auto=format&fit=crop&w=300&q=80" alt="كريسبي تشكن برجر" class="w-24 h-24 object-cover rounded-xl">
                     <div class="flex-1 flex flex-col justify-between">
                         <div>
-                            <h3 class="font-bold text-base">كريسبي تشكن برجر</h3>
+                            <h3 class="font-bold text-base product-name">كريسبي تشكن برجر</h3>
                             <p class="text-xs text-gray-400 mt-0.5 line-clamp-2">صدر دجاج مقرمش حار، خس، صوص المايونيز الحار.</p>
                         </div>
                         <div class="flex justify-between items-center mt-2">
-                            <span class="font-black text-amber-400 text-sm">5.75 د.أ</span>
-                            <button class="bg-amber-500 hover:bg-amber-600 text-gray-900 w-8 h-8 rounded-full flex items-center justify-center font-bold shadow transition-transform active:scale-95">
+                            <span class="font-black text-amber-400 text-sm"><span class="product-price">5.75</span> د.أ</span>
+                            <button onclick="addToCart('كريسبي تشكن برجر', 5.75)" class="bg-amber-500 hover:bg-amber-600 text-gray-900 w-8 h-8 rounded-full flex items-center justify-center font-bold shadow transition-transform active:scale-95">
                                 <i class="fa-solid fa-plus"></i>
                             </button>
                         </div>
@@ -107,5 +103,57 @@
 
     </main>
 
+    <!-- شريط السلة العائم (Floating Cart Bar) -->
+    <div id="cart-bar" class="fixed bottom-4 left-4 right-4 max-w-md mx-auto bg-amber-500 text-gray-900 p-4 rounded-2xl shadow-2xl flex justify-between items-center cursor-pointer transition-all duration-300 transform translate-y-28 z-50" onclick="toggleCartModal()">
+        <div class="flex items-center space-x-3 space-x-reverse">
+            <div class="bg-gray-900 text-amber-400 w-9 h-9 rounded-xl flex items-center justify-center font-black" id="cart-count">0</div>
+            <div>
+                <p class="font-bold text-sm leading-tight">سلة المشتريات</p>
+                <p class="text-xs text-gray-800">عرض المنتجات وتأكيد الطلب</p>
+            </div>
+        </div>
+        <div class="font-black text-base">
+            <span id="cart-total">0.00</span> د.أ 🛒
+        </div>
+    </div>
+
+    <!-- نافذة تفاصيل السلة ورقم الطاولة (Cart Modal) -->
+    <div id="cart-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex justify-end flex-col">
+        <div class="bg-gray-800 rounded-t-3xl max-w-md w-full mx-auto p-5 max-h-[85vh] flex flex-col border-t border-gray-700 shadow-2xl">
+            <div class="flex justify-between items-center pb-3 border-b border-gray-700">
+                <h3 class="font-black text-lg text-amber-400 flex items-center gap-2">
+                    <i class="fa-solid fa-shopping-cart"></i> سلة طلبات الطاولة
+                </h3>
+                <button onclick="toggleCartModal()" class="text-gray-400 hover:text-white text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- إدخال رقم الطاولة -->
+            <div class="py-3 border-b border-gray-700">
+                <label class="block text-xs font-bold text-gray-300 mb-1">🪑 أدخل رقم الطاولة:</label>
+                <input type="number" id="table-number" placeholder="مثال: 5" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-3 py-2 text-white text-sm focus:outline-none focus:border-amber-500">
+            </div>
+
+            <!-- قائمة منتجات السلة -->
+            <div id="cart-items-container" class="py-3 overflow-y-auto space-y-3 flex-1 divide-y divide-gray-700/50">
+                <!-- يتم تعبئتها عبر JavaScript -->
+            </div>
+
+            <!-- المجموع وزر إرسال الواتساب -->
+            <div class="pt-3 border-t border-gray-700 space-y-3">
+                <div class="flex justify-between items-center text-lg font-black">
+                    <span>المجموع الكلي:</span>
+                    <span class="text-amber-400"><span id="modal-total">0.00</span> د.أ</span>
+                </div>
+                <button onclick="sendToWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3.5 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-transform active:scale-95">
+                    <i class="fa-brands fa-whatsapp text-xl"></i> إرسال الطلب عبر الواتساب
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ربط ملف الـ JavaScript الخارجي -->
+    <script src="script.js"></script>
 </body>
 </html>
